@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>作品頁面</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="libraries/p5.min.js"></script>
+</head>
+<body>
+  <!-- 左側固定選單（覆蓋在動畫畫布上） -->
+  <nav id="left-menu" aria-label="主要選單">
+    <ul>
+      <li><a href="#">第一單元作品</a></li>
+  <li><a href="#" id="link-docs">第一單元講義</a></li>
+  <li><a href="https://ariel1120jj-sketch.github.io/20251103/" target="_blank" rel="noopener" id="link-quiz">測驗系統</a></li>
+      <li><a href="#">回到首頁</a></li>
+    </ul>
+  </nav>
+
+  <!-- 文件檢視器（點選「第一單元講義」時以 iframe 顯示） -->
+  <div id="doc-viewer" aria-hidden="true">
+    <button id="doc-close" aria-label="關閉文件">關閉</button>
+  <iframe id="doc-iframe" src="" title="第一單元講義" style="width:70vw;height:85vh;border:1px solid #888;" allow="accelerometer; device-motion; device-orientation"></iframe>
+  </div>
+
+  <!-- 載入 p5 草稿（會在背景顯示動畫） -->
+  <script src="sketch.js"></script>
+
+  <script>
+    // 點選「第一單元講義」開啟 iframe，點選關閉鈕關閉並清除 src
+    (function(){
+      const link = document.getElementById('link-docs');
+      const viewer = document.getElementById('doc-viewer');
+      const iframe = document.getElementById('doc-iframe');
+      const closeBtn = document.getElementById('doc-close');
+      const DOC_URL = 'https://hackmd.io/@x-szOgytSz69ItDTKuKmRg/BJCiwmCsge';
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        iframe.src = DOC_URL;
+        viewer.classList.add('open');
+        viewer.setAttribute('aria-hidden', 'false');
+      });
+
+      closeBtn.addEventListener('click', function(){
+        viewer.classList.remove('open');
+        viewer.setAttribute('aria-hidden', 'true');
+        // 清除 src 以停止載入/播放
+        iframe.src = '';
+      });
+    })();
+  </script>
+</body>
+</html>

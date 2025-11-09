@@ -1,0 +1,94 @@
+:root{
+  --menu-width: 320px;
+  --bg: rgba(18,18,18,0.96);
+  --text: #ffffff;
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial;
+}
+
+/* 左側固定選單 */
+#left-menu{
+  position:fixed;
+  left:0;
+  top:0;
+  height:100%;
+  width:var(--menu-width);
+  background:var(--bg);
+  color:var(--text);
+  padding:48px 20px;
+  box-sizing:border-box;
+  z-index:9999;
+  pointer-events:auto;
+}
+
+#left-menu ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+#left-menu li{
+  margin-bottom:18px;
+}
+
+#left-menu a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:32px; /* 指定字體大小 */
+  line-height:1;
+  display:block;
+  padding:6px 8px;
+  border-radius:6px;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+#left-menu a:hover{
+  background: rgba(255,255,255,0.06);
+}
+
+/* 文件檢視器（iframe） */
+#doc-viewer{
+  position:fixed;
+  left:var(--menu-width);
+  top:0;
+  width:calc(100% - var(--menu-width));
+  height:100%;
+  background:#ffffff;
+  z-index:10000;
+  display:none;
+  box-shadow: -6px 0 16px rgba(0,0,0,0.25);
+}
+
+#doc-viewer.open{ display:block; }
+
+#doc-iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
+/* 關閉按鈕 */
+#doc-close{
+  position:absolute;
+  right:18px;
+  top:18px;
+  z-index:10001;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  font-size:16px;
+  cursor:pointer;
+  border-radius:4px;
+}
+
+/* 行動裝置處理（必要時調整） */
+@media (max-width:600px){
+  :root{ --menu-width: 220px; }
+  #left-menu a{ font-size:24px; }
+}
